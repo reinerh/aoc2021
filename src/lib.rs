@@ -4,6 +4,12 @@ pub fn read_file(day: u8) -> String {
     std::fs::read_to_string(filename).unwrap()
 }
 
+pub fn read_all_lines(day: u8) -> Vec<String> {
+    read_file(day).split('\n')
+                  .map(String::from)
+                  .collect()
+}
+
 pub fn read_lines(day: u8) -> Vec<String> {
     read_file(day).split('\n')
                   .filter(|n| !n.is_empty())
