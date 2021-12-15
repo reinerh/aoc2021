@@ -56,7 +56,7 @@ fn dijkstra(map: &HashMap<Position, isize>, from: &Position, to: &Position) -> i
             if !map.contains_key(&neigh_pos) {
                 continue;
             }
-            let neigh = State { cost: cost + *map.get(&pos).unwrap(), pos: neigh_pos };
+            let neigh = State { cost: cost + *map.get(&neigh_pos).unwrap(), pos: neigh_pos };
             if neigh.cost < dist[&neigh.pos] {
                 heap.push(neigh);
                 dist.insert(neigh.pos, neigh.cost);
@@ -85,7 +85,7 @@ fn lowest_risk<T: AsRef<str>>(input: &[T]) -> isize {
     let start = Position { x: 0, y: 0 };
     let end = *map.keys().max_by_key(|&pos| pos.x + pos.y).unwrap();
 
-    dijkstra(&map, &end, &start)
+    dijkstra(&map, &start, &end)
 }
 
 fn lowest_risk_large<T: AsRef<str>>(input: &[T]) -> isize {
@@ -110,7 +110,7 @@ fn lowest_risk_large<T: AsRef<str>>(input: &[T]) -> isize {
     }
     let end = *large_map.keys().max_by_key(|&pos| pos.x + pos.y).unwrap();
 
-    dijkstra(&large_map, &end, &start)
+    dijkstra(&large_map, &start, &end)
 }
 
 #[cfg(test)]
